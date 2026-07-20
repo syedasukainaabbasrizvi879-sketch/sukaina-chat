@@ -3,13 +3,9 @@
 // ═══════════════════════════════════════
 
 const CONFIG = {
-    // CHANGE THIS to your deployed backend URL
-    API_URL: 'http://localhost:8080',
-    WS_URL: 'ws://localhost:8080',
-    
-    // For production (Railway):
-    // API_URL: 'https://sukaina-chat.up.railway.app',
-    // WS_URL: 'wss://sukaina-chat.up.railway.app',
+    // UPDATED: Deployed backend URLs
+    API_URL: 'https://sukaina-chat.onrender.com',
+    WS_URL: 'wss://sukaina-chat.onrender.com',
     
     ENDPOINTS: {
         REGISTER: '/api/v1/auth/register',
@@ -26,5 +22,6 @@ function getApiUrl(endpoint) {
 
 // Helper function to get WebSocket URL
 function getWsUrl(token) {
+    // HTTPS ke liye WSS use hota hai
     return CONFIG.WS_URL + CONFIG.ENDPOINTS.WEBSOCKET + '?token=' + token;
 }
