@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════
-// CHAT LOGIC
+// CHAT LOGIC (FIXED)
 // ═══════════════════════════════════════
 
 let ws = null;
@@ -33,14 +33,18 @@ function connectWebSocket() {
 
     ws.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        displayMessage(message.content, 'received', message.timestamp);
+        
+        // Sirf tab message show karo jab wo current open chat se match kare
+        if (message.sender_id === currentRecipient || message.recipient_id === currentRecipient) {
+            const type = message.sender_id === userId ? 'sent' : 'received';
+            const timestamp = message.timestamp || (new Date().getTime() / 1000);
+            displayMessage(message.content, type, timestamp);
+        }
     };
 
     ws.onclose = () => {
         console.log('❌ WebSocket disconnected');
         updateConnectionStatus('Disconnected', false);
-        
-        // Reconnect after 3 seconds
         setTimeout(connectWebSocket, 3000);
     };
 
@@ -58,6 +62,11 @@ function startChat() {
     
     if (!recipientId) {
         alert('Please enter a recipient User ID');
+        return;
+    }
+
+    if (recipientId === userId) {
+        alert('You cannot chat with yourself!');
         return;
     }
 
@@ -97,7 +106,7 @@ function sendMessage() {
         };
 
         ws.send(JSON.stringify(message));
-        displayMessage(content, 'sent', Date.now() / 1000);
+        // Note: Backend ab khud sender ko wapas bhej raha hai, isliye yahan duplicate display ki zaroorat nahi
         input.value = '';
     } else {
         alert('Not connected. Please wait...');
@@ -141,7 +150,14 @@ async function loadMessages() {
         const data = await response.json();
 
         if (data.messages) {
-            data.messages.reverse().forEach(msg => {
+            document.getElementById('messages').innerHTML = '';
+            // Sirf wo messages filter karo jo current recipient ke sath hain
+            const filteredMessages = data.messages.filter(msg => 
+                (msg.sender_id === userId && msg.recipient_id === currentRecipient) ||
+                (msg.sender_id === currentRecipient && msg.recipient_id === userId)
+            );
+
+            filteredMessages.reverse().forEach(msg => {
                 const type = msg.sender_id === userId ? 'sent' : 'received';
                 const timestamp = new Date(msg.created_at).getTime() / 1000;
                 displayMessage(msg.content, type, timestamp);
