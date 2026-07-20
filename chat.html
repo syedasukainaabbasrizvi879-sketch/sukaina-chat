@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukaina Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">A</div>
+                    <div>
+                        <h3 id="currentUsername">User</h3>
+                        <span class="status online">● Online</span>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="recipientInput" placeholder="Enter recipient User ID...">
+                <button onclick="startChat()">Chat</button>
+            </div>
+
+            <div class="conversations" id="conversations">
+                <div class="conversation-item">
+                    <div class="conv-avatar">B</div>
+                    <div class="conv-info">
+                        <h4>Bob</h4>
+                        <p>Click to chat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <div class="avatar" id="chatAvatar">?</div>
+                    <div>
+                        <h3 id="chatWith">Select a conversation</h3>
+                        <span class="status" id="connectionStatus">Disconnected</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="messages" id="messages">
+                <div class="welcome-message">
+                    <h2>👋 Welcome to Sukaina Chat</h2>
+                    <p>Enter a recipient ID to start messaging</p>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+                <button id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
