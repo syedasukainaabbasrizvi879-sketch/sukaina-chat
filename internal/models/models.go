@@ -42,6 +42,3 @@ type WebSocketMessage struct {
     SenderID    string `json:"sender_id,omitempty"`
     Timestamp   int64  `json:"timestamp,omitempty"`
 }
-```
-
----

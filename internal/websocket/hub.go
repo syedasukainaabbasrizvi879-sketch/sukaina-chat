@@ -138,11 +138,3 @@ func (c *Client) writePump() {
         }
     }
 }
-```
-
----
-
-# PART 5: MAIN FILE + DEPLOYMENT
-
----
-

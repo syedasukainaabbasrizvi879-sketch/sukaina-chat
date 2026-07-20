@@ -1,4 +1,3 @@
-```go
 package auth
 
 import (
@@ -53,10 +52,3 @@ func ValidateToken(tokenString string) (*Claims, error) {
     }
     return claims, nil
 }
-```
-
----
-
-# PART 3: HTTP HANDLERS
-
----

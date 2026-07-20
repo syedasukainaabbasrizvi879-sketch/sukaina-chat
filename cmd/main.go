@@ -63,6 +63,3 @@ func main() {
         log.Fatal("Server failed:", err)
     }
 }
-```
-
----

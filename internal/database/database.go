@@ -94,11 +94,3 @@ func GetMessages(userID string) ([]models.Message, error) {
     }
     return messages, nil
 }
-```
-
----
-
-# PART 2: AUTHENTICATION
-
----
-
