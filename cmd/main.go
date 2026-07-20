@@ -51,6 +51,9 @@ func main() {
     http.HandleFunc("/api/v1/auth/login", corsMiddleware(handlers.Login))
     http.HandleFunc("/api/v1/messages", corsMiddleware(handlers.GetMessages))
     http.HandleFunc("/ws", hub.HandleWebSocket)
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte("Sukaina Chat Backend is Running!"))
+})
 
     // Get port
     port := os.Getenv("PORT")
